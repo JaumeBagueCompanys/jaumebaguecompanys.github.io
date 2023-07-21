@@ -1,5 +1,6 @@
 # Transferencing files
 
+function print_usage {
     echo -e "USAGE: aws-igenomes.sh\n" \
         "\t\t[-g <genome name>]\n" \
         "\t\t[-s <source name>]\n" \
@@ -15,3 +16,4 @@
         "Please note that this script requires the AWS command\n" \
         "line tools to be installed and configured for authenticated\n" \
         "access.\n" >&2
+}
