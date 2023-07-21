@@ -1,6 +1,6 @@
 # Transferencing files
 
-#!/bin/bash
+
 
 function print_usage {
     echo -e "USAGE: aws-igenomes.sh\n" \
