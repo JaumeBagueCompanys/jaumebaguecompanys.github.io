@@ -232,40 +232,16 @@
   <script src="https://cdn.jsdelivr.net/clipboard.js/1.6.1/clipboard.min.js"></script>
   <script type="text/javascript">
   var types = {
-"WP1/BRAF-MUTAT/A/FASTA":["fasta1", "fasta2", "fasta3"],
-"WP1/BRAF-MUTAT/A/BAM":["bam1", "bam2", "bam3"],            
-"WP1/BRAF-MUTAT/B/FASTA":["fasta4", "fasta5", "fasta6"],
-"WP1/BRAF-MUTAT/B/BAM":["bam4", "bam5", "bam6"],            
+"WP1/BRAF-MUTAT/A:["fasta", "bam"],        
+"WP1/BRAF-MUTAT/B:["fasta", "bam"]            
   };
   var type_nicenames = {
-      gtf: "GTF",
-      bed12: "BED",
-      bismark: "Bismark",
-      bowtie: "Bowtie 1",
-      bowtie2: "Bowtie 2",
-      bwa: "BWA",
-      star: "STAR",
       fasta: "FASTA",
-      chromosomes: "FASTA (Chromosomes)",
-      abundantseq: "Abundant Sequences",
-      smrna: "smRNA",
-      variation: "Variation",
-      gatk: "GATK"
+      bam: "BAM"
   };
   var type_suffixes = {
-      gtf: "Annotation/Genes/", // appended to command: genes.gtf
-      bed12: "Annotation/Genes/", // appended to command: genes.bed
-      bismark: "Sequence/BismarkIndex/",
-      bowtie: "Sequence/BowtieIndex/",
-      bowtie2: "Sequence/Bowtie2Index/",
-      bwa: "Sequence/BWAIndex/",
-      star: "Sequence/STARIndex/",
-      fasta: "Sequence/WholeGenomeFasta/",
-      chromosomes: "Sequence/Chromosomes/",
-      abundantseq: "Sequence/AbundantSequences/",
-      smrna: "Annotation/SmallRNA/",
-      variation: "Annotation/Variation/",
-      gatk: ""
+      fasta: "FASTA/Genes/",
+      bam: "BAM/Genes/"
   };
   var manifest = [];
   $(function(){
@@ -274,7 +250,7 @@
 
     // Get the full file list
     try {
-      $.get('ngi-igenomes_file_manifest.txt', function(data){
+      $.get('melcaya_files_manifest.txt', function(data){
         try {
           manifest = data.match(/[^\r\n]+/g);
           $('#file_manifest').html('waiting for selection..');
