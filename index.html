@@ -173,13 +173,13 @@
     </form>
     <h5>Bucket URL</h5>
     <div class="prewrap" id="bucket_url_wrapper">
-      <button class="btn" data-clipboard-target="#bucket_url" disabled>Copy</button>
+      <button class="btn" data-clipboard-target="#bucket_url">Copy</button>
       <pre><code id="bucket_url"><span class="text-muted">waiting for selection&hellip;</span></code></pre>
     </div>
 
     <h5>Sync command</h5>
     <div class="prewrap" id="sync_command_wrapper">
-      <button class="btn" data-clipboard-target="#sync_command" disabled>Copy</button>
+      <button class="btn" data-clipboard-target="#sync_command">Copy</button>
       <pre><code id="sync_command"><span class="text-muted">waiting for selection&hellip;</span></code></pre>
     </div>
 
@@ -240,8 +240,8 @@
       bam: "BAM"
   };
   var type_suffixes = {
-      fasta: "FASTA/",
-      bam: "BAM/"
+      fasta: "/FASTA",
+      bam: "/BAM"
   };
   var manifest = [];
   $(function(){
