@@ -233,8 +233,8 @@
       bam: "BAM"
   };
   var type_suffixes = {
-      fasta: "/FASTA",
-      bam: "/BAM"
+      fasta: "FASTA/",
+      bam: "BAM/"
   };
   var manifest = [];
   $(function(){
@@ -359,8 +359,8 @@
         }
         for(i=0; i<types[k].length; i++){
           $('#Type').append($('<option>', {
-            value: Type[k][i],
-            text: type_nicenames[Type[k][i]]
+            value: types[k][i],
+            text: type_nicenames[types[k][i]]
           }));
         }
         $('#Type').trigger('change');
