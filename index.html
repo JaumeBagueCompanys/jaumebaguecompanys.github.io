@@ -135,9 +135,10 @@
         <div class="form-group col-sm-3">
           <label for="Genetics">Genetics</label>
           <select class="form-control" id="Genetics">
-           <option value="BRAF-MUTAT">BRAF-MUTAT</option>
-           <option value="BRAF-WT">BRAF-WT</option>
-           <option value="ALL">ALL</option>
+             <option value="">[ select ]</option>
+             <option value="BRAF-MUTAT">BRAF-MUTAT</option>
+             <option value="BRAF-WT">BRAF-WT</option>
+             <option value="ALL">ALL</option>
           </select>
         </div>
         <div class="form-group col-sm-3">
@@ -149,20 +150,12 @@
         </div>
         <div class="form-group col-sm-3">
           <label for="Type">Type</label>
-          <select class="form-control" id="Type" disabled>
+          <select class="form-control" id="Type">
             <option value="FASTA">FASTA</option>
             <option value="BAM">BAM</option>
           </select>
         </div>
       </div>
-      <div class="row">
-        <div class="form-group col-sm-3">
-          <label for="region">Region</label>
-          <small class="text-muted">Currently just <code>eu-west-1</code></small>
-          <select class="form-control" id="region" disabled>
-            <option value="eu-west-1">eu-west-1</option>
-          </select>
-        </div>
         <div class="form-group col-sm-9">
           <label for="local">Local directory</label>
           <small class="text-muted">Available variables:
