@@ -240,8 +240,8 @@
       bam: "BAM"
   };
   var type_suffixes = {
-      fasta: "FASTA/Genes/",
-      bam: "BAM/Genes/"
+      fasta: "FASTA/",
+      bam: "BAM/"
   };
   var manifest = [];
   $(function(){
@@ -270,22 +270,22 @@
     var paths = Object.keys(types);
     var Work_packages = [];
     var Genetics = {};
-    var builds = {};
+    var Subgroup = {};
     for(i=0; i<paths.length; i++){
       var s = paths[i].split('/');
-      if(genomes.indexOf(s[0]) < 0){
-        genomes.push(s[0]);
+      if(Work_packages.indexOf(s[0]) < 0){
+        Work_packages.push(s[0]);
       }
-      if(sources[s[0]] == undefined){
-        sources[s[0]] = [];
+      if(Genetics[s[0]] == undefined){
+        Genetics[s[0]] = [];
       }
-      if(sources[s[0]].indexOf(s[1]) < 0){
-        sources[s[0]].push(s[1]);
+      if(Genetics[s[0]].indexOf(s[1]) < 0){
+        Genetics[s[0]].push(s[1]);
       }
-      if(builds[s[0]+'/'+s[1]] == undefined){
-        builds[s[0]+'/'+s[1]] = [];
+      if(Subgroup[s[0]+'/'+s[1]] == undefined){
+        Subgroup[s[0]+'/'+s[1]] = [];
       }
-      builds[s[0]+'/'+s[1]].push(s[2]);
+      Subgroup[s[0]+'/'+s[1]].push(s[2]);
     }
     // Populate first dropdown
     for(i=0; i<genomes.length; i++){
@@ -295,37 +295,37 @@
       }));
     }
     // LISTENERS!
-    $('#genome').change(function(e){
+    $('#Work_packages').change(function(e){
       e.preventDefault();
       // Reset downstream dropdown
-      $('#build').html('<option value="">Please select a source</option>').attr('disabled', true);
-      $('#type').html('<option value="">Please select a build</option>').attr('disabled', true);
+      $('#Genetics').html('<option value="">Please select a source</option>').attr('disabled', true);
+      $('#Subgroup').html('<option value="">Please select a build</option>').attr('disabled', true);
       $('#bucket_url, #sync_command').html('<span class="text-muted">waiting for selectionâ€¦</span>');
       // Set up source dropdown
       var g = $(this).val();
       if(g == ''){
-        $('#source').html('<option value="">Please select a genome</option>').attr('disabled', true);
+        $('#Genetics').html('<option value="">Please select a genome</option>').attr('disabled', true);
       } else {
-        $('#source').html('').attr('disabled', false);
-        if(sources[g].length > 1){
-          $('#source').html('<option value="">[ select ]</option>');
+        $('#Genetics').html('').attr('disabled', false);
+        if(Genetics[g].length > 1){
+          $('#Genetics').html('<option value="">[ select ]</option>');
         }
-        for(i=0; i<sources[g].length; i++){
-          $('#source').append($('<option>', {
-            value: sources[g][i],
-            text: sources[g][i]
+        for(i=0; i<Genetics[g].length; i++){
+          $('#Genetics').append($('<option>', {
+            value: Genetics[g][i],
+            text: Genetics[g][i]
           }));
         }
-        $('#source').trigger('change');
-        $('#build').trigger('change');
-        $('#type').trigger('change');
+        $('#Genetics').trigger('change');
+        $('#Subgroup').trigger('change');
+        $('#Type').trigger('change');
       }
     });
     // Source dropdown
-    $('#source').change(function(e){
+    $('#Genetics').change(function(e){
       e.preventDefault();
       // Reset downstream dropdown
-      $('#type').html('<option value="">Please select a build</option>').attr('disabled', true);
+      $('#Type').html('<option value="">Please select a build</option>').attr('disabled', true);
       $('#bucket_url, #sync_command').html('<span class="text-muted">waiting for selectionâ€¦</span>');
       // Set up build dropdown
       var g = $('#Work_package').val();
@@ -335,21 +335,21 @@
         $('#Subgroup').html('<option value="">Please select a source</option>').attr('disabled', true);
       } else {
         $('#Subgroup').html('').attr('disabled', false);
-        if(builds[k].length > 1){
-          $('#build').html('<option value="">[ select ]</option>');
+        if(Subgroup[k].length > 1){
+          $('#Subgroup').html('<option value="">[ select ]</option>');
         }
         for(i=0; i<builds[k].length; i++){
           $('#Subgroup').append($('<option>', {
-            value: builds[k][i],
-            text: builds[k][i]
+            value: Subgroup[k][i],
+            text: Subgroup[k][i]
           }));
         }
-        $('#build').trigger('change');
-        $('#type').trigger('change');
+        $('#Subgroup').trigger('change');
+        $('#Type').trigger('change');
       }
     });
     // Build dropdown
-    $('#build').change(function(e){
+    $('#Subgroup').change(function(e){
       e.preventDefault();
       // Set up type dropdown
       var g = $('#Work_package').val();
@@ -357,24 +357,24 @@
       var b = $(this).val();
       var k = g+'/'+s+'/'+b;
       if(b == ''){
-        $('#type').html('<option value="">Please select a source</option>').attr('disabled', true);
+        $('#Type').html('<option value="">Please select a source</option>').attr('disabled', true);
         $('#bucket_url, #sync_command').html('<span class="text-muted">waiting for selectionâ€¦</span>');
       } else {
-        $('#type').html('').attr('disabled', false);
+        $('#Type').html('').attr('disabled', false);
         if(types[k].length > 1){
-          $('#type').html('<option value="">[ select ]</option>');
+          $('#Type').html('<option value="">[ select ]</option>');
         }
         for(i=0; i<types[k].length; i++){
-          $('#type').append($('<option>', {
-            value: types[k][i],
-            text: type_nicenames[types[k][i]]
+          $('#Type').append($('<option>', {
+            value: Type[k][i],
+            text: type_nicenames[Type[k][i]]
           }));
         }
-        $('#type').trigger('change');
+        $('#Type').trigger('change');
       }
     });
     // Type dropdown
-    $('#type, #region, #local').change(function(e){ update_cmd(); });
+    $('#Type, #local').change(function(e){ update_cmd(); });
     $('#local').keyup(function(e){ update_cmd(); });
     function update_cmd(){
       var g = $('#Work_package').val();
