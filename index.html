@@ -289,9 +289,9 @@
     }
     // Populate first dropdown
     for(i=0; i<genomes.length; i++){
-      $('#all_genomes').append($('<option>', {
-        value: genomes[i],
-        text: genomes[i].replace('_',' ')
+      $('#Work_packages').append($('<option>', {
+        value: Work_packages[i],
+        text: Work_packages[i].replace('_',' ')
       }));
     }
     // LISTENERS!
@@ -392,7 +392,7 @@
         // Build path and sync command
         var path = g+'/'+s+'/'+b+'/'+type_suffixes[t];
         local = local.replace('{Work_package}',g).replace('{Genetics}',s).replace('{Subgroup}',b).replace('{Type}',type_suffixes[t]);
-        var s3path = 's3://ngi-igenomes/igenomes/'+path;
+        var s3path = 's3://hcb/patient-genome'+path;
         var s3cmd = 'resync folder --yes-sign-request --region '+region+' sync '+s3path+' '+local;
         if(t == 'gtf'){
           s3path += 'genes.gtf';
